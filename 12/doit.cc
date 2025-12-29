@@ -30,7 +30,7 @@ json read() {
     cin.ignore(1);
     string s;
     char c;
-    while ((cin >> c), c != '"')
+    while (cin >> c, c != '"')
       s.push_back(c);
     return json(s);
   }
@@ -69,24 +69,22 @@ int add_up(json const &obj, bool ignore_red) {
     return get<int>(obj);
   case 1:
     return 0;
-  case 2:
-    {
-      int total = 0;
-      for (auto const &child : get<vector<json>>(obj))
-        total += add_up(child, ignore_red);
-      return total;
+  case 2: {
+    int total = 0;
+    for (auto const &child : get<vector<json>>(obj))
+      total += add_up(child, ignore_red);
+    return total;
+  }
+  default: {
+    int total = 0;
+    bool saw_red = false;
+    for (auto const &kv : get<map<string, json>>(obj)) {
+      total += add_up(kv.second, ignore_red);
+      if (kv.second.index() == 1 && get<string>(kv.second) == "red")
+        saw_red = true;
     }
-  default:
-    {
-      int total = 0;
-      bool saw_red = false;
-      for (auto const &kv : get<map<string, json>>(obj)) {
-        total += add_up(kv.second, ignore_red);
-        if (kv.second.index() == 1 && get<string>(kv.second) == "red")
-          saw_red = true;
-      }
-      return ignore_red && saw_red ? 0 : total;
-    }
+    return ignore_red && saw_red ? 0 : total;
+  }
   }
 }
 

@@ -41,9 +41,7 @@ void part1() {
   cout << ans << '\n';
 }
 
-void part2() {
-  cout << "Start the Weather Machine!\n";
-}
+void part2() { cout << "Start the Weather Machine!\n"; }
 
 int main(int argc, char **argv) {
   if (argc != 2) {

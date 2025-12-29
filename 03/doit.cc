@@ -22,11 +22,20 @@ void solve(size_t num_santas) {
     for (size_t santa = 0; santa < num_santas; ++santa) {
       char dir = directions[i + santa];
       switch (dir) {
-      case '<': --locs[santa].first; break;
-      case '>': ++locs[santa].first; break;
-      case '^': --locs[santa].second; break;
-      case 'v': ++locs[santa].second; break;
-      default: assert(dir == '<' || dir == '>' || dir == '^' || dir == 'v');
+      case '<':
+        --locs[santa].first;
+        break;
+      case '>':
+        ++locs[santa].first;
+        break;
+      case '^':
+        --locs[santa].second;
+        break;
+      case 'v':
+        ++locs[santa].second;
+        break;
+      default:
+        assert(dir == '<' || dir == '>' || dir == '^' || dir == 'v');
       }
       visited.insert(locs[santa]);
     }

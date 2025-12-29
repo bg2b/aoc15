@@ -106,7 +106,7 @@ vector<vector<size_t>> split(size_t i, size_t j, atoms step) {
     // Trivial, nothing left to synthesize with
     if (i == j)
       // Nothing left to synthesize, that's OK
-      return { vector<size_t>({ i }) };
+      return {vector<size_t>({i})};
     // Can't make something from nothing
     return {};
   }
@@ -135,10 +135,10 @@ vector<vector<size_t>> split(size_t i, size_t j, atoms step) {
 
 // Find the number of steps in the best way to synthesize [i, j) from
 // an atom
-//optional<size_t> &synthesize(requirement const &req) {
+// optional<size_t> &synthesize(requirement const &req) {
 optional<size_t> &synthesize(size_t i, size_t j, atom const &a) {
   assert(i < j);
-  requirement req({ i, j, a });
+  requirement req({i, j, a});
   auto p = cache.find(req);
   if (p != cache.end())
     return p->second;

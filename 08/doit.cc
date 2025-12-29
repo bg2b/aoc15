@@ -9,14 +9,12 @@
 
 using namespace std;
 
-char hex(char c) {
-  return c >= 'a' ? c - 'a' + 10 : c - '0';
-}
+char hex(char c) { return c >= 'a' ? c - 'a' + 10 : c - '0'; }
 
 string in_memory(string const &coded) {
   assert(coded.length() >= 2 && coded.front() == '"' && coded.back() == '"');
   string result;
-  for (size_t i = 1; i < coded.length() - 1; ) {
+  for (size_t i = 1; i < coded.length() - 1;) {
     if (coded[i] == '\\') {
       ++i;
       if (coded[i] == '"') {

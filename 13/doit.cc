@@ -18,8 +18,8 @@ void seating(bool with_self) {
   int amount;
   set<string> people;
   map<pair<string, string>, int> happiness;
-  while (cin >> person >> _ >> what >> amount >>
-         _ >> _ >> _ >> _ >> _ >> _ >> neighbor) {
+  while (cin >> person >> _ >> what >> amount >> _ >> _ >> _ >> _ >> _ >> _ >>
+         neighbor) {
     people.insert(person);
     if (what == "lose")
       amount = -amount;
@@ -40,8 +40,8 @@ void seating(bool with_self) {
   do {
     int total_happiness = 0;
     for (size_t i = 0; i < np; ++i) {
-      total_happiness += happiness[{ ppl[i], ppl[(i + 1) % np] }];
-      total_happiness += happiness[{ ppl[i], ppl[(i + np - 1) % np] }];
+      total_happiness += happiness[{ppl[i], ppl[(i + 1) % np]}];
+      total_happiness += happiness[{ppl[i], ppl[(i + np - 1) % np]}];
     }
     most_happiness = max(most_happiness, total_happiness);
   } while (next_permutation(ppl.begin(), ppl.end()));

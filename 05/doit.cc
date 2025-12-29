@@ -20,42 +20,40 @@ void count_nice(function<bool(string const &s)> is_nice) {
 }
 
 void part1() {
-  auto is_nice =
-    [](string const &s) {
-      for (auto const &forbidden : { "ab", "cd", "pq", "xy" })
-        if (s.find(forbidden) != string::npos)
-          return false;
-      int num_vowels = 0;
-      auto const none = string::npos;
-      for (size_t start = 0; (start = s.find_first_of("aeiou", start)) != none; ) {
-        ++start;
-        ++num_vowels;
-      }
-      if (num_vowels < 3)
+  auto is_nice = [](string const &s) {
+    for (auto const &forbidden : {"ab", "cd", "pq", "xy"})
+      if (s.find(forbidden) != string::npos)
         return false;
-      int num_twins = 0;
-      for (size_t i = 0; i + 1 < s.length(); ++i)
-        if (s[i] == s[i + 1])
-          ++num_twins;
-      return num_twins > 0;
-    };
+    int num_vowels = 0;
+    auto const none = string::npos;
+    for (size_t start = 0; (start = s.find_first_of("aeiou", start)) != none;) {
+      ++start;
+      ++num_vowels;
+    }
+    if (num_vowels < 3)
+      return false;
+    int num_twins = 0;
+    for (size_t i = 0; i + 1 < s.length(); ++i)
+      if (s[i] == s[i + 1])
+        ++num_twins;
+    return num_twins > 0;
+  };
   count_nice(is_nice);
 }
 
 void part2() {
-  auto is_nice =
-    [](string const &s) {
-      int num_separated_twins = 0;
-      bool has_dup_pair = false;
-      for (size_t i = 0; i + 2 < s.length(); ++i) {
-        if (s[i] == s[i + 2])
-          ++num_separated_twins;
-        string adj = s.substr(i, 2);
-        if (s.find(adj, i + 2) != string::npos)
-          has_dup_pair = true;
-      }
-      return num_separated_twins > 0 && has_dup_pair;
-    };
+  auto is_nice = [](string const &s) {
+    int num_separated_twins = 0;
+    bool has_dup_pair = false;
+    for (size_t i = 0; i + 2 < s.length(); ++i) {
+      if (s[i] == s[i + 2])
+        ++num_separated_twins;
+      string adj = s.substr(i, 2);
+      if (s.find(adj, i + 2) != string::npos)
+        has_dup_pair = true;
+    }
+    return num_separated_twins > 0 && has_dup_pair;
+  };
   count_nice(is_nice);
 }
 

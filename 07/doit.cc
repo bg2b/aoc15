@@ -23,17 +23,15 @@ struct circuit;
 
 gate_op identity_op = [](bits b, bits) { return b; };
 gate_op not_op = [](bits b, bits) { return ~b; };
-gate_op and_op = [](bits b1, bits b2) { return b1&b2; };
-gate_op or_op = [](bits b1, bits b2) { return b1|b2; };
-gate_op lshift_op = [](bits b1, bits b2) { return b1<<b2; };
-gate_op rshift_op = [](bits b1, bits b2) { return b1>>b2; };
+gate_op and_op = [](bits b1, bits b2) { return b1 & b2; };
+gate_op or_op = [](bits b1, bits b2) { return b1 | b2; };
+gate_op lshift_op = [](bits b1, bits b2) { return b1 << b2; };
+gate_op rshift_op = [](bits b1, bits b2) { return b1 >> b2; };
 
-map<string, gate_op> ops =
-  { { "AND", and_op },
-    { "OR", or_op },
-    { "LSHIFT", lshift_op },
-    { "RSHIFT", rshift_op }
-  };
+map<string, gate_op> ops = {{"AND", and_op},
+                            {"OR", or_op},
+                            {"LSHIFT", lshift_op},
+                            {"RSHIFT", rshift_op}};
 
 struct gate {
   // Value for a constant, cache for logic functions
@@ -41,14 +39,17 @@ struct gate {
   optional<tuple<gate_op, string, string>> logic;
 
   gate(bits val) : output(val) {}
-  gate(string const &in) : logic({ identity_op, in, in }) {}
-  gate(gate_op op, string const &in1, string const &in2) :
-    logic({ op, in1, in2 }) {}
+  gate(string const &in) : logic({identity_op, in, in}) {}
+  gate(gate_op op, string const &in1, string const &in2)
+      : logic({op, in1, in2}) {}
 
   bits eval(circuit &cir);
 
   // Reset the cached value
-  void reset() { if (logic) output.reset(); }
+  void reset() {
+    if (logic)
+      output.reset();
+  }
 };
 
 struct circuit {
@@ -95,12 +96,11 @@ circuit::circuit() {
     while (ss >> token)
       tokens.push_back(token);
     assert(tokens.size() >= 3 && tokens.size() <= 5);
-    auto maybe_const =
-      [&](string const &s) {
-        if (s.find_first_not_of("0123456789") != string::npos)
-          return s;
-        return constant(stoul(s));
-      };
+    auto maybe_const = [&](string const &s) {
+      if (s.find_first_not_of("0123456789") != string::npos)
+        return s;
+      return constant(stoul(s));
+    };
     assert(tokens[tokens.size() - 2] == "->");
     string const &wire = tokens.back();
     if (tokens.size() == 3)

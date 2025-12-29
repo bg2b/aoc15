@@ -41,8 +41,8 @@ struct grid {
   brightness total_brightness() const;
 };
 
-grid::grid(light_op on_op_, light_op off_op_, light_op toggle_op_) :
-  on_op(on_op_), off_op(off_op_), toggle_op(toggle_op_) {
+grid::grid(light_op on_op_, light_op off_op_, light_op toggle_op_)
+    : on_op(on_op_), off_op(off_op_), toggle_op(toggle_op_) {
   for (int i = 0; i < n; ++i)
     fill(lights[i].begin(), lights[i].end(), 0);
 }
@@ -87,8 +87,7 @@ void solve(light_op on_op, light_op off_op, light_op toggle_op) {
 }
 
 void part1() {
-  solve([](brightness) { return 1; },
-        [](brightness) { return 0; },
+  solve([](brightness) { return 1; }, [](brightness) { return 0; },
         [](brightness b) { return !b; });
 }
 

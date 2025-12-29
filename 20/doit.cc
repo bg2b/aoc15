@@ -11,10 +11,10 @@ using namespace std;
 
 using num = unsigned;
 
-vector<num> odd_primes{ 3 };
+vector<num> odd_primes{3};
 
 void more_primes() {
-  for (num next_p = odd_primes.back() + 2; ; next_p += 2) {
+  for (num next_p = odd_primes.back() + 2;; next_p += 2) {
     bool is_prime = true;
     for (num p : odd_primes) {
       if (p * p > next_p)
@@ -85,7 +85,7 @@ void part2() {
   num ans;
   // It's not 100% clear that the highly-abundant 630 observation is
   // applicable when lazy elves are taken into account
-  for (ans = 1; ; ++ans) {
+  for (ans = 1;; ++ans) {
     num sum_div = sum_of_divisors(ans);
     if (sum_div < min_sum_div)
       // Not enough even without laziness

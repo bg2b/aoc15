@@ -33,11 +33,20 @@ computer::computer(num initial_a) {
       assert(reg == "a" || reg == "b");
       int reg_num = reg == "a" ? 0 : 1;
       if (op == "hlf")
-        fn = [=](int &pc, num reg[2]) { reg[reg_num] /= 2; ++pc; };
+        fn = [=](int &pc, num reg[2]) {
+          reg[reg_num] /= 2;
+          ++pc;
+        };
       else if (op == "tpl")
-        fn = [=](int &pc, num reg[2]) { reg[reg_num] *= 3; ++pc; };
+        fn = [=](int &pc, num reg[2]) {
+          reg[reg_num] *= 3;
+          ++pc;
+        };
       else
-        fn = [=](int &pc, num reg[2]) { ++reg[reg_num]; ++pc; };
+        fn = [=](int &pc, num reg[2]) {
+          ++reg[reg_num];
+          ++pc;
+        };
     } else if (op == "jmp") {
       int offset;
       cin >> offset;
@@ -53,12 +62,10 @@ computer::computer(num initial_a) {
       int reg_num = reg == "a" ? 0 : 1;
       if (op == "jie")
         fn = [=](int &pc, num reg[2]) {
-               pc += (reg[reg_num] & 1) == 0 ? offset : 1;
-             };
+          pc += (reg[reg_num] & 1) == 0 ? offset : 1;
+        };
       else
-        fn = [=](int &pc, num reg[2]) {
-               pc += reg[reg_num] == 1 ? offset : 1;
-             };
+        fn = [=](int &pc, num reg[2]) { pc += reg[reg_num] == 1 ? offset : 1; };
     }
     program.push_back(fn);
   }

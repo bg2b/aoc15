@@ -40,8 +40,8 @@ void read() {
     ingredients.emplace_back(line);
 }
 
-void search(size_t next, int tsps, int desired_calories,
-            vector<int> &amounts, int &best) {
+void search(size_t next, int tsps, int desired_calories, vector<int> &amounts,
+            int &best) {
   if (next == ingredients.size() - 1) {
     // Only one choice for last ingredient amount
     amounts[next] = tsps;

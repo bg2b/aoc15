@@ -47,19 +47,17 @@ void solve(function<bool(string const &, int)> compat) {
 }
 
 void part1() {
-  solve([](string const &item, int amount) {
-          return tape[item] == amount;
-        });
+  solve([](string const &item, int amount) { return tape[item] == amount; });
 }
 
 void part2() {
   solve([](string const &item, int amount) {
-          if (item == "cats" || item == "trees")
-            return amount > tape[item];
-          if (item == "pomeranians" || item == "goldfish")
-            return amount < tape[item];
-          return amount == tape[item];
-        });
+    if (item == "cats" || item == "trees")
+      return amount > tape[item];
+    if (item == "pomeranians" || item == "goldfish")
+      return amount < tape[item];
+    return amount == tape[item];
+  });
 }
 
 int main(int argc, char **argv) {

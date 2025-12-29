@@ -14,7 +14,7 @@ string next_passwd(string pwd) {
   assert(pwd.find_first_not_of("abcdefghijklmnopqrstuvwxyz") == string::npos);
   while (true) {
     // Increment
-    for (size_t i = pwd.length(); i-- > 0; )
+    for (size_t i = pwd.length(); i-- > 0;)
       if (pwd[i] == 'z')
         pwd[i] = 'a';
       else {

@@ -20,8 +20,8 @@ bool hard_mode;
 
 enum { magic_missile = 0, drain, shield, poison, recharge, nspells };
 
-int mana_costs[nspells] = { 53, 73, 113, 173, 229 };
-int effect_durations[nspells] = { 0, 0, 6, 6, 5 };
+int mana_costs[nspells] = {53, 73, 113, 173, 229};
+int effect_durations[nspells] = {0, 0, 6, 6, 5};
 
 // Search state
 struct state {
@@ -30,7 +30,7 @@ struct state {
   int boss_hp{boss_initial_hp};
   int mana{500};
   int mana_spent{0};
-  array<int, nspells> effects{ 0, 0, 0, 0, 0 };
+  array<int, nspells> effects{0, 0, 0, 0, 0};
 
   // Can the indicated spell be cast (enough mana, not already in
   // effect)
@@ -54,8 +54,8 @@ bool state::castable(int spell) const {
   // <= 1 since do_effects will decrement the remaining duration, and
   // it's allowable to cast an effect spell on the same turn that the
   // effect expires
-  return (mana >= mana_costs[spell] &&
-          (effect_durations[spell] == 0 || effects[spell] <= 1));
+  return mana >= mana_costs[spell] &&
+         (effect_durations[spell] == 0 || effects[spell] <= 1);
 }
 
 void state::do_effects() {
@@ -116,11 +116,9 @@ void state::advance(int spell) {
 }
 
 int operator==(state const &s1, state const &s2) {
-  return (s1.player_hp == s2.player_hp &&
-          s1.boss_hp == s2.boss_hp &&
-          s1.mana == s2.mana &&
-          s1.mana_spent == s2.mana_spent &&
-          s1.effects == s2.effects);
+  return s1.player_hp == s2.player_hp && s1.boss_hp == s2.boss_hp &&
+         s1.mana == s2.mana && s1.mana_spent == s2.mana_spent &&
+         s1.effects == s2.effects;
 }
 
 int comp(state const &s1, state const &s2) {
@@ -147,11 +145,11 @@ void solve(bool hard) {
   set<state> visited;
   priority_queue<state> q;
   auto visit = [&](state const &s) {
-                 if (visited.count(s))
-                   return;
-                 visited.insert(s);
-                 q.push(s);
-               };
+    if (visited.count(s))
+      return;
+    visited.insert(s);
+    q.push(s);
+  };
   visit(state());
   optional<int> min_mana_spent;
   while (!q.empty()) {

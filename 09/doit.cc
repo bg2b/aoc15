@@ -29,14 +29,18 @@ void solve(int (*best_fn)(int, int)) {
   do {
     int total_dist = 0;
     for (size_t i = 0; i + 1 < order.size(); ++i)
-      total_dist += dists[{ order[i], order[i + 1] }];
+      total_dist += dists[{order[i], order[i + 1]}];
     best_dist = best_fn(best_dist.value_or(total_dist), total_dist);
   } while (next_permutation(order.begin(), order.end()));
   cout << *best_dist << '\n';
 }
 
-void part1() { solve([](int d1, int d2) { return min(d1, d2); }); }
-void part2() { solve([](int d1, int d2) { return max(d1, d2); }); }
+void part1() {
+  solve([](int d1, int d2) { return min(d1, d2); });
+}
+void part2() {
+  solve([](int d1, int d2) { return max(d1, d2); });
+}
 
 int main(int argc, char **argv) {
   if (argc != 2) {

@@ -10,7 +10,7 @@ using namespace std;
 
 string say(string const &seq) {
   string result;
-  for (size_t i = 0; i < seq.length(); ) {
+  for (size_t i = 0; i < seq.length();) {
     char digit = seq[i++];
     int num_repeats = 1;
     while (seq[i] == digit && i < seq.length()) {
