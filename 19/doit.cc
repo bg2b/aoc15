@@ -10,6 +10,7 @@
 #include <vector>
 #include <set>
 #include <map>
+#include <optional>
 #include <cctype>
 #include <cassert>
 

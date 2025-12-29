@@ -8,6 +8,7 @@
 #include <queue>
 #include <set>
 #include <array>
+#include <optional>
 #include <cassert>
 
 using namespace std;

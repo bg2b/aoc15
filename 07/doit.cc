@@ -11,6 +11,7 @@
 #include <functional>
 #include <optional>
 #include <tuple>
+#include <cstdint>
 #include <cassert>
 
 using namespace std;
